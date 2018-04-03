@@ -1,0 +1,20 @@
+{
+  "name": "edon",
+  "version": "1.0.0",
+  "description": "Run browser JS in the terminal",
+  "homepage": "https://github.com/dbkaplun/edon",
+  "repository": "https://github.com/dbkaplun/edon.git",
+  "bugs": "https://github.com/dbkaplun/edon/issues",
+  "main": "edon.js",
+  "bin": {
+    "edon": "./edon.js"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "puppeteer": "^1.2.0"
+  },
+  "author": "Dan Kaplun <dbkaplun@gmail.com>",
+  "license": "MIT"
+}
