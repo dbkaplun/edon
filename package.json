@@ -5,11 +5,12 @@
   "homepage": "https://github.com/dbkaplun/edon",
   "repository": "https://github.com/dbkaplun/edon.git",
   "bugs": "https://github.com/dbkaplun/edon/issues",
-  "main": "edon.js",
+  "main": "src/edon.js",
   "bin": {
-    "edon": "./edon.js"
+    "edon": "./src/edon.js"
   },
   "scripts": {
+    "edon": "./src/edon.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
