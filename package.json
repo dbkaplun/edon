@@ -1,6 +1,6 @@
 {
   "name": "edon",
-  "version": "2.0.0",
+  "version": "3.0.0",
   "description": "Run browser JS in the terminal",
   "homepage": "https://github.com/dbkaplun/edon",
   "repository": "https://github.com/dbkaplun/edon.git",
