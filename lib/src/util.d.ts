@@ -1,12 +1,12 @@
 #!/usr/bin/env node
 /// <reference types="node" />
-import { Browser, Page, ConsoleMessage } from 'puppeteer';
-export declare function getDefaultBrowserAndPage(): Promise<{
+import { Browser, Page, ConsoleMessage, LaunchOptions } from 'puppeteer';
+export declare function getDefaultBrowserAndPage(opts?: LaunchOptions): Promise<{
     browser: Browser;
     page: Page;
 }>;
-export declare function getDefaultBrowser(): Promise<Browser>;
-export declare function getDefaultPage(): Promise<Page>;
+export declare function getDefaultBrowser(opts?: LaunchOptions): Promise<Browser>;
+export declare function getDefaultPage(opts?: LaunchOptions): Promise<Page>;
 export declare function newPage(browser: Browser): Promise<Page>;
 export interface RunScriptResult {
     val: any;
