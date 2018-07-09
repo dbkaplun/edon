@@ -1,14 +1,24 @@
 #!/usr/bin/env node
 
-const puppeteer = require('puppeteer');
-const { getDefaultBrowserAndPage, readStdin, runScript, isRecoverableError, debug } = require('./util');
+import { LaunchOptions } from 'puppeteer';
 
-async function edonInteractive() {
+import { getDefaultBrowserAndPage, readStdin, runScript, isRecoverableError, debug } from './util';
+
+export interface EdonInteractiveContext {
+  ctx: string;
+}
+
+export async function edonInteractive(opts?: LaunchOptions) {
   const repl = require('repl');
-  const { browser, page } = await getDefaultBrowserAndPage();
+  const { browser, page } = await getDefaultBrowserAndPage(opts);
   await new Promise((resolve, reject) => {
     const server = repl.start({
-      eval(cmd, context, filename, cb) {
+      eval(
+        cmd: string,
+        context: EdonInteractiveContext,
+        filename: string,
+        cb: (err: Error | null, res?: any) => any,
+      ) {
         const isFunctionDeclaration = /^(\s*)function(\s+)([$_\w]+)(\s*)\(/.test(cmd);
         if (isFunctionDeclaration) {
           context.ctx += `;${cmd}`;
@@ -52,10 +62,10 @@ async function edonInteractive() {
   await browser.close();
 }
 
-async function edonNoninteractive() {
+export async function edonNoninteractive(opts?: LaunchOptions) {
   const [stdin, { browser, page }] = await Promise.all([
     readStdin(),
-    getDefaultBrowserAndPage(),
+    getDefaultBrowserAndPage(opts),
   ]);
   try {
     await runScript(page, stdin.toString('utf8'));
@@ -65,7 +75,9 @@ async function edonNoninteractive() {
   await browser.close();
 }
 
-(process.stdin.isTTY
-  ? edonInteractive
-  : edonNoninteractive
-)().catch(console.error);
+if (process.mainModule === module) {
+  (process.stdin.isTTY
+    ? edonInteractive
+    : edonNoninteractive
+  )().catch(console.error);
+}
